@@ -1,0 +1,56 @@
+/** pass parameter by request **/
+Route::get('/greeting', function () {
+   return view('vuejs',["name" => "Zeeshan"]);
+});
+
+
+/** show view as per parameter by request **/
+Route::get('/greeting1', function () {
+    $id = request("id");
+
+    if($id == 1){
+        return view('vuejs',['id'=>$id]);
+    }else{
+        return view('welcome');
+    }
+});
+
+/** pass parameter by request **/
+Route::get('/greeting', function () {
+   return view('vuejs',["id" => request("id")]);
+});
+
+/** pass single parameter **/
+Route::get('/greeting3/{id}', function ($id) {
+    return view('vuejs',['id' => $id]);
+});
+
+/** Optional parameter **/
+Route::get('/greeting4/{id?}', function ($id) {
+    return view('vuejs',['id' => $id]);
+});
+
+
+/** Get post data using id **/
+Route::get('/posts/{id?}', function ($id) {
+    $post = [
+        "singletitle" => "This is single page website",
+        "multititle" => "This is multi page website",
+    ];
+    if(!array_key_exists($id,$post)){
+        abort(404, 'the post was not found!');
+    }
+   return view('vuejs',['id' => $id,
+   "websitetitle"=>$post[$id]]);
+});
+
+/** Passing any paramerter to controller **/
+Route::get('/posts/{id?}', "PostController@getdata");
+
+
+/** Calling a parameter in view **/
+
+{{ $name }} 
+{!! $name !!} for using javascript in a view pass from parameter
+<?= $name ?> echo the variable
+<?php e($name); ?> using in php

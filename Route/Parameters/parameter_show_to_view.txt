@@ -1,0 +1,6 @@
+/** Calling a parameter in view **/
+
+{{ $name }} 
+{!! $name !!} for using javascript in a view pass from parameter
+<?= $name ?> echo the variable
+<?php e($name); ?> using in php
